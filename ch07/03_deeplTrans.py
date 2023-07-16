@@ -1,5 +1,5 @@
 import requests
-RapidAPI = "0dc8633683mshd156234629de99cp19cd02jsn0868a7c6407d" 
+RapidAPI = "토큰 입력" 
 def deepl_translate(text, RapidAPI=RapidAPI, sl="en", tl="ko"):
     url = "https://deepl-translator.p.rapidapi.com/translate"
     
