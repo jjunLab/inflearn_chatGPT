@@ -1,8 +1,10 @@
 import requests
 
+PAPAGO_ID = "ID ìž…ë ¥" 
+PAPAGO_PW = "Password ìž…ë ¥" 
+
 def papago_translate(text):
-    PAPAGO_ID = "ID ÀÔ·Â" 
-    PAPAGO_PW = "Password ÀÔ·Â"  
+     
     data = {'text' : text,
             'source' : 'en',
             'target': 'ko'}

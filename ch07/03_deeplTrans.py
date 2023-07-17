@@ -1,5 +1,7 @@
 import requests
-RapidAPI = "ÅäÅ« ÀÔ·Â" 
+
+RapidAPI = "í† í° ì…ë ¥" 
+
 def deepl_translate(text, RapidAPI=RapidAPI, sl="en", tl="ko"):
     url = "https://deepl-translator.p.rapidapi.com/translate"
     

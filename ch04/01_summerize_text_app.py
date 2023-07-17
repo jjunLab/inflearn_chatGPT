@@ -14,10 +14,10 @@ def askGpt(prompt):
 ##### 메인 함수 #####
 def main():
     st.set_page_config(page_title="요약 프로그램")
+    # 사이드바
     with st.sidebar:
         # Open AI API 키 입력받기
-        open_apikey = st.text_input(label='OPENAI API 키', placeholder='Enter Your API Key', value='',type='password')
-        
+        open_apikey = st.text_input(label='OPENAI API 키', placeholder='Enter Your API Key', value='',type='password')    
         # 입력받은 API 키 표시
         if open_apikey:
             openai.api_key  = open_apikey 

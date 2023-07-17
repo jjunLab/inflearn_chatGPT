@@ -1,15 +1,15 @@
-##### ±âº» Á¤º¸ ºÒ·¯¿À±â ####
-# Streamlit ÆĞÅ°Áö Ãß°¡
+##### ê¸°ë³¸ ì •ë³´ ë¶ˆëŸ¬ì˜¤ê¸° ####
+# Streamlit íŒ¨í‚¤ì§€ ì¶”ê°€
 import streamlit as st
-# OpenAI ÆĞÅ°Áö Ãß°¡
+# OpenAI íŒ¨í‚¤ì§€ ì¶”ê°€
 import openai
-# ±¸±Û ¹ø¿ª ÆĞÅ°Áö Ãß°¡
+# êµ¬ê¸€ ë²ˆì—­ íŒ¨í‚¤ì§€ ì¶”ê°€
 from googletrans import Translator
-# API¿äÃ»À» À§ÇÑ Requests ÆĞÅ°Áö Ãß°¡ 
+# APIìš”ì²­ì„ ìœ„í•œ Requests íŒ¨í‚¤ì§€ ì¶”ê°€ 
 import requests
 
-##### ±â´É ±¸Çö ÇÔ¼ö #####
-# ChatGPT ¹ø¿ª
+##### ê¸°ëŠ¥ êµ¬í˜„ í•¨ìˆ˜ #####
+# ChatGPT ë²ˆì—­
 def gpt_translate(messages):
     messages_prompt = [{"role": "system", "content": f'Translate the following english text into Korean. Text to translate : {messages}'}]
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages_prompt)
@@ -18,7 +18,7 @@ def gpt_translate(messages):
 
     return system_message["content"]
 
-# ÆÄÆÄ°í ¹ø¿ª
+# íŒŒíŒŒê³  ë²ˆì—­
 def papago_translate(text,PAPAGO_ID,PAPAGO_PW):
 
     data = {'text' : text,
@@ -63,14 +63,14 @@ def deepl_translate(text, RapidAPI, sl="en", tl="ko"):
     response = requests.request("POST", url, json=payload, headers=headers)
     return response.json()["text"]
 
-##### ¸ŞÀÎ ÇÔ¼ö #####
+##### ë©”ì¸ í•¨ìˆ˜ #####
 def main():
-    # ±âº» ¼³Á¤
+    # ê¸°ë³¸ ì„¤ì •
     st.set_page_config(
-        page_title="¹ø¿ª ÇÃ·§Æû ¸ğÀ½",
+        page_title="ë²ˆì—­ í”Œë«í¼ ëª¨ìŒ",
         layout="wide")
 
-    # session state ÃÊ±âÈ­
+    # session state ì´ˆê¸°í™”
     if "OPENAI_API" not in st.session_state:
         st.session_state["OPENAI_API"] = ""
 
@@ -84,67 +84,67 @@ def main():
         st.session_state["RapidAPI"] = ""
 
 
-    # »çÀÌµå¹Ù ¹Ù »ı¼º
+    # ì‚¬ì´ë“œë°” ë°” ìƒì„±
     with st.sidebar:
 
-        # Open AI API Å° ÀÔ·Â¹Ş±â
-        st.session_state["OPENAI_API"] = st.text_input(label='OPENAI API Å°', placeholder='Enter Your API Key', value='',type='password')
+        # Open AI API í‚¤ ì…ë ¥ë°›ê¸°
+        st.session_state["OPENAI_API"] = st.text_input(label='OPENAI API í‚¤', placeholder='Enter Your API Key', value='',type='password')
 
         st.markdown('---')
 
-        # PAPAGO API ID/PW ÀÔ·Â¹Ş±â
+        # PAPAGO API ID/PW ì…ë ¥ë°›ê¸°
         st.session_state["PAPAGO_ID"] = st.text_input(label='PAPAGO API ID', placeholder='Enter PAPAGO ID', value='')
         st.session_state["PAPAGO_PW"] = st.text_input(label='PAPAGO API PW', placeholder='Enter PAPAGO PW', value='',type='password')
 
         st.markdown('---')
 
-        # PAPAGO API ID/PW ÀÔ·Â¹Ş±â
+        # PAPAGO API ID/PW ì…ë ¥ë°›ê¸°
         st.session_state["RapidAPI"] = st.text_input(label='RapidAPI', placeholder='Enter PapidAPI API Key', value='',type='password')
     
         st.markdown('---')
 
-    # Á¦¸ñ 
-    st.header('¹ø¿ª ÇÃ·§Æû ºñ±³ÇÏ±â ÇÁ·Î±×·¥?')
-    # ±¸ºĞ¼±
+    # ì œëª© 
+    st.header('ë²ˆì—­ í”Œë«í¼ ë¹„êµí•˜ê¸° í”„ë¡œê·¸ë¨?')
+    # êµ¬ë¶„ì„ 
     st.markdown('---')
-    st.subheader("¹ø¿ªÀ» ÇÏ°íÀÚ ÇÏ´Â ÅØ½ºÆ®¸¦ ÀÔ·ÂÇÏ¼¼¿ä")
+    st.subheader("ë²ˆì—­ì„ í•˜ê³ ì í•˜ëŠ” í…ìŠ¤íŠ¸ë¥¼ ì…ë ¥í•˜ì„¸ìš”")
     txt = st.text_area(label="",placeholder="input English..", height=200)
     st.markdown('---')
 
-    st.subheader("ChatGPT ¹ø¿ª °á°ú")
+    st.subheader("ChatGPT ë²ˆì—­ ê²°ê³¼")
     st.text("https://openai.com/blog/chatgpt")
     if st.session_state["OPENAI_API"] and txt:
         openai.api_key = st.session_state["OPENAI_API"]
         result = gpt_translate(txt)
         st.info(result)
     else:
-        st.info('API Å°¸¦ ³ÖÀ¸¼¼¿ä')
+        st.info('API í‚¤ë¥¼ ë„£ìœ¼ì„¸ìš”')
     st.markdown('---')
 
-    st.subheader("ÆÄÆÄ°í ¹ø¿ª °á°ú")
+    st.subheader("íŒŒíŒŒê³  ë²ˆì—­ ê²°ê³¼")
     st.text("https://papago.naver.com/")
     if st.session_state["PAPAGO_ID"] and st.session_state["PAPAGO_PW"] and txt:
         result = papago_translate(txt,st.session_state["PAPAGO_ID"],st.session_state["PAPAGO_PW"])
         st.info(result)
     else:
-        st.info('ÆÄÆÄ°í API ID, PW¸¦ ³ÖÀ¸¼¼¿ä')
+        st.info('íŒŒíŒŒê³  API ID, PWë¥¼ ë„£ìœ¼ì„¸ìš”')
     st.markdown('---')
 
-    st.subheader("Deepl ¹ø¿ª °á°ú")
+    st.subheader("Deepl ë²ˆì—­ ê²°ê³¼")
     st.text("https://www.deepl.com/translator")
     if st.session_state["RapidAPI"] and txt:
         result = deepl_translate(txt,st.session_state["RapidAPI"])
         st.info(result)
     else:
-        st.info('API Å°¸¦ ³ÖÀ¸¼¼¿ä')
+        st.info('API í‚¤ë¥¼ ë„£ìœ¼ì„¸ìš”')
 
-    st.subheader("±¸±Û ¹ø¿ª °á°ú")
+    st.subheader("êµ¬ê¸€ ë²ˆì—­ ê²°ê³¼")
     st.text("https://translate.google.co.kr/")
     if txt:
         result = google_trans(txt)
         st.info(result)
     else:
-        st.info("APIÅ°°¡ ÇÊ¿ä ¾ø½À´Ï´Ù")
+        st.info("APIí‚¤ê°€ í•„ìš” ì—†ìŠµë‹ˆë‹¤")
     st.markdown('---')
 
 if __name__=="__main__":
