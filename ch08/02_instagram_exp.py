@@ -1,8 +1,8 @@
 from pathlib import Path
 from instagrapi import Client
 from PIL import Image
-USER_ID = "autoinstaupload"
-USER_PASSWORD = "wnstjd1246!"
+USER_ID = "instagram ID"
+USER_PASSWORD = "Password!"
 
 image = Image.open("instaimg.jpg")
 image = image.convert("RGB")
