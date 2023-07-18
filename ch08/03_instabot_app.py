@@ -57,7 +57,8 @@ def main():
 
     # 기본 설정
     st.set_page_config(page_title="Instabot", page_icon="?")
-
+    
+    # session state 초기화
     if "description" not in st.session_state:
         st.session_state["description"] = ""
 
