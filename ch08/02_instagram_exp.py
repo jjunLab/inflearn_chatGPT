@@ -2,10 +2,8 @@ from pathlib import Path
 from instagrapi import Client
 from PIL import Image
 
-# USER_ID = "instagram ID"
-# USER_PASSWORD = "Password!"
-USER_ID = "autoinstaupload"
-USER_PASSWORD = "wnstjd1246!"
+USER_ID = "instagram ID"
+USER_PASSWORD = "Password!"
 
 # 이미지 사이즈 변환
 image = Image.open("instaimg.jpg")
