@@ -5,7 +5,9 @@ import streamlit as st
 import openai
 # 구글 번역 패키지 추가
 from googletrans import Translator
-# API요청을 위한 Requests 패키지 추가 
+# Deepl 번역 패키지 추가
+import deepl
+# 파파고 API요청을 위한 Requests 패키지 추가 
 import requests
 
 ##### 기능 구현 함수 #####
@@ -20,7 +22,6 @@ def gpt_translate(messages):
 
 # 파파고 번역
 def papago_translate(text,PAPAGO_ID,PAPAGO_PW):
-
     data = {'text' : text,
             'source' : 'en',
             'target': 'ko'}
@@ -40,28 +41,18 @@ def papago_translate(text,PAPAGO_ID,PAPAGO_PW):
     else:
         print("Error Code:" , rescode)
 
+# 구글 번역
 def google_trans(messages):
     google = Translator()
     result = google.translate(messages, dest="ko")
 
     return result.text
 
-def deepl_translate(text, RapidAPI, sl="en", tl="ko"):
-    url = "https://deepl-translator.p.rapidapi.com/translate"
-    
-    payload = {
-        "text": text,
-        "source": sl,
-        "target": tl
-    }
-    headers = {
-        "content-type": "application/json",
-        "X-RapidAPI-Key": RapidAPI,
-        "X-RapidAPI-Host": "deepl-translator.p.rapidapi.com"
-    }
-    
-    response = requests.request("POST", url, json=payload, headers=headers)
-    return response.json()["text"]
+# 디플 번역
+def deepl_translate(text, deeplAPI):
+    translator = deepl.Translator(deeplAPI)
+    result = translator.translate_text(text, target_lang="KO")
+    return result.text
 
 ##### 메인 함수 #####
 def main():
@@ -80,15 +71,15 @@ def main():
     if "PAPAGO_PW" not in st.session_state:
         st.session_state["PAPAGO_PW"] = ""
 
-    if "RapidAPI" not in st.session_state:
-        st.session_state["RapidAPI"] = ""
+    if "DeeplAPI" not in st.session_state:
+        st.session_state["DeeplAPI"] = ""
 
 
     # 사이드바 바 생성
     with st.sidebar:
 
         # Open AI API 키 입력받기
-        st.session_state["OPENAI_API"] = st.text_input(label='OPENAI API 키', placeholder='Enter Your API Key', value='',type='password')
+        st.session_state["OPENAI_API"] = st.text_input(label='OPENAI API 키', placeholder='Enter Your OpenAI API Key', value='',type='password')
 
         st.markdown('---')
 
@@ -99,12 +90,12 @@ def main():
         st.markdown('---')
 
         # PAPAGO API ID/PW 입력받기
-        st.session_state["RapidAPI"] = st.text_input(label='RapidAPI', placeholder='Enter PapidAPI API Key', value='',type='password')
+        st.session_state["DeeplAPI"] = st.text_input(label='Deepl API 키', placeholder='Enter Your Deepl API API Key', value='',type='password')
     
         st.markdown('---')
 
     # 제목 
-    st.header('번역 플랫폼 비교하기 프로그램?')
+    st.header('번역 플랫폼 비교하기 프로그램')
     # 구분선
     st.markdown('---')
     st.subheader("번역을 하고자 하는 텍스트를 입력하세요")
@@ -132,8 +123,8 @@ def main():
 
     st.subheader("Deepl 번역 결과")
     st.text("https://www.deepl.com/translator")
-    if st.session_state["RapidAPI"] and txt:
-        result = deepl_translate(txt,st.session_state["RapidAPI"])
+    if st.session_state["DeeplAPI"] and txt:
+        result = deepl_translate(txt,st.session_state["DeeplAPI"])
         st.info(result)
     else:
         st.info('API 키를 넣으세요')

@@ -4,7 +4,7 @@ import streamlit as st
 # OpenAI 패키기 추가
 import openai
 
-##### 기능 구현 함수 정리#####
+##### 기능 구현 함수 #####
 def askGpt(prompt):
     messages_prompt = [{"role": "system", "content": prompt}]
     response = openai.ChatCompletion.create(model='gpt-3.5-turbo', messages=messages_prompt)
@@ -39,7 +39,7 @@ def main():
 
     if st.button("광고 문구 생성"):
         prompt = f'''
-        아래 내용을 참고해서 광고 문구를 1~2줄짜리 광구문구 5개 작성해줘
+        아래 내용을 참고해서 1~2줄짜리 광구문구 5개 작성해줘
         - 제품명: {name}
         - 브렌드 명: {com_name}
         - 브렌드 핵심 가치: {value}

@@ -1,7 +1,9 @@
 import requests
 
-PAPAGO_ID = "ID 입력" 
-PAPAGO_PW = "Password 입력" 
+# PAPAGO_ID = "ID 입력" 
+# PAPAGO_PW = "Password 입력" 
+PAPAGO_ID = "T4A0QtN6XwZlygm_X_ZB" 
+PAPAGO_PW = "YMA74X9HjD"
 
 def papago_translate(text):
      

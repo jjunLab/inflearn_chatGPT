@@ -1,25 +1,10 @@
-import requests
+import deepl
 
-RapidAPI = "토큰 입력" 
-
-def deepl_translate(text, RapidAPI=RapidAPI, sl="en", tl="ko"):
-    url = "https://deepl-translator.p.rapidapi.com/translate"
-    
-    payload = {
-        "text": text,
-        "source": sl,
-        "target": tl
-    }
-    headers = {
-        "content-type": "application/json",
-        "X-RapidAPI-Key": RapidAPI,
-        "X-RapidAPI-Host": "deepl-translator.p.rapidapi.com"
-    }
-    
-    response = requests.request("POST", url, json=payload, headers=headers)
-    return response.json()["text"]
+# auth_key = "API Key"  # Replace with your key
+auth_key = "78f46891-6198-d86f-f4da-8ec4dc744663:fx"  # Replace with your key
+translator = deepl.Translator(auth_key)
 
 text ="GPT-4 is more creative and collaborative than ever before. It can generate, edit, and iterate with users on creative and technical writing tasks, such as composing songs, writing screenplays, or learning a user??s writing style."
 
-result = deepl_translate(text)
-print(result)
+result = translator.translate_text(text, target_lang="KO")
+print(result.text)

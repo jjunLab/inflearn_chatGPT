@@ -23,7 +23,6 @@ def uploadinstagram(description):
     cl = Client()
     cl.login(st.session_state["instagram_ID"], st.session_state["instagram_Password"])
     cl.photo_upload("instaimg_resize.jpg" , description)
-    
 
 # ChatGPT에게 질문/답변받기
 def getdescriptionFromGPT(topic, mood):
@@ -83,7 +82,7 @@ def main():
         - 인스타그램 포스팅 생성는 UI는 스트림릿을 활용하여 만들었습니다.
         - 이미지는 OpenAI의 Dall.e 2 를 활용하여 생성합니다. 
         - 포스팅 글은 OpenAI의 GPT 모델을 활용하여 생성합니다. 
-        - 자동 포스팅인 instagram API를 활용합니다.
+        - 자동 포스팅은 instagram API를 활용합니다.
         """
         )
 
@@ -93,12 +92,12 @@ def main():
     with st.sidebar:
 
         # Open AI API 키 입력받기
-        open_apikey = st.text_input(label='OPENAI API 키', placeholder='Enter Your API Key', value='')
+        open_apikey = st.text_input(label='OPENAI API 키', placeholder='Enter Your API Key', value='',type="password")
 
         # 입력받은 API 키 표시
         if open_apikey:
-            st.markdown(f'OPENAI API KEY: `{open_apikey}`')    
-        openai.api_key = open_apikey
+            openai.api_key = open_apikey    
+        
 
         st.markdown('---')
 
