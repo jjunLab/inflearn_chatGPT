@@ -32,6 +32,7 @@ def main():
         if open_apikey:
             st.session_state["OPENAI_API"] = open_apikey 
         st.markdown('---')
+        
     # 메인공간
     st.header("PDF 내용 질문 프로그램📜")
     st.markdown('---')

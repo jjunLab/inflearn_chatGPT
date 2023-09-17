@@ -1,7 +1,7 @@
 import urllib3
 import json
 
-BOT_TOKEN = 'Bot Token'
+BOT_TOKEN = 'Token'
 
 def sendMessage(chat_id, text):
     data = {
@@ -13,6 +13,6 @@ def sendMessage(chat_id, text):
     response = http.request('POST',url ,fields=data)
     return json.loads(response.data.decode('utf-8'))
 
-result = sendMessage(1613810898,"¹Ý°©½À´Ï´Ù Àú´Â ÅÚ·¹±×·¥ º¿ ÀÔ´Ï´Ù!")
+result = sendMessage(1613810898,"ë°˜ê°‘ìŠµë‹ˆë‹¤ ì €ëŠ” í…”ë ˆê·¸ëž¨ ë´‡ ìž…ë‹ˆë‹¤!")
 
 print(result)

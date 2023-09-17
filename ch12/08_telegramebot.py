@@ -5,11 +5,11 @@ import openai
 from fastapi import Request, FastAPI
 
 # OpenAI API KEY
-API_KEY = "OpenAI API Key"
+API_KEY = "API_key"
 openai.api_key = API_KEY
 
-# Telegram API KEY
-BOT_TOKEN = "Telegram Bot Token"
+# Telegram Token
+BOT_TOKEN = "Token"
 
 ###### 서버 생성 단계 #####
 
@@ -19,7 +19,7 @@ app = FastAPI()
 async def root():
     return {"message": "TelegramChatbot"}
 
-@app.post("/chat/")
+@app.post("/chat")
 async def chat(request: Request):
     telegramrequest = await request.json()
     chatBot(telegramrequest)

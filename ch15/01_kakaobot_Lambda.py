@@ -56,17 +56,20 @@ def lambda_handler(event, context):
 
 # 답변/사진 요청 및 응답 확인 함수
 def responseOpenAI(request,response_queue,filename):
-    # 사용자다 버튼을 클릭하여 답변 완성 여부를 다시 봤을 시
+    # 사용자가 버튼을 클릭하여 답변 완성 여부를 다시 봤을 시
     if '생각 다 끝났나요?' in request["userRequest"]["utterance"]:
         # 텍스트 파일 열기
         with open(filename) as f:
             last_update = f.read()
         # 텍스트 파일 내 저장된 정보가 있을 경우
         if len(last_update.split())>1:
-            kind, bot_res, prompt = last_update.split()[0],last_update.split()[1],last_update.split()[2]  
+            kind = last_update.split()[0]  
             if kind == "img":
+                bot_res, prompt = last_update.split()[1],last_update.split()[2]
                 response_queue.put(imageResponseFormat(bot_res,prompt))
             else:
+                bot_res = last_update[4:]
+                print(bot_res)
                 response_queue.put(textResponseFormat(bot_res))
             dbReset(filename)
 
@@ -86,8 +89,8 @@ def responseOpenAI(request,response_queue,filename):
         prompt = request["userRequest"]["utterance"].replace("/ask", "")
         bot_res = getTextFromGPT(prompt)
         response_queue.put(textResponseFormat(bot_res))
-
-        save_log = "ask"+ " " + str(bot_res) + " " + str(prompt)
+        print(bot_res)
+        save_log = "ask"+ " " + str(bot_res)
         with open(filename, 'w') as f:
             f.write(save_log)
             

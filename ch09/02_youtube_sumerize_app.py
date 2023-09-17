@@ -25,6 +25,7 @@ def youtube_url_check(url):
     match = re.match(pattern, url)
     return match is not None
 
+##### 메인 함수 #####
 def main():
 
     #기본 설정
@@ -61,12 +62,13 @@ def main():
         if not youtube_url_check(youtube_video_url):
             st.error("YouTube URL을 확인하세요.")
         else:
+
             width = 50
             side = width/2
             _, container, _ = st.columns([side, width, side])
             # 입력받은 유튜브 영상 보여주기
             container.video(data=youtube_video_url)
-
+            
             # 대본 추출하기
             loader = YoutubeLoader.from_youtube_url(youtube_video_url)
             transcript = loader.load()

@@ -1,7 +1,7 @@
 import openai
 
 #API 키 입력
-openai.api_key = "API Key"
+openai.api_key = "API_key"
 # 녹음파일 열기
 audio_file = open("output.mp3", "rb")
 # whisper 모델에 음원파일 전달하기

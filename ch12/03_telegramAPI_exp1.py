@@ -1,7 +1,7 @@
 import urllib3
 import json
 
-BOT_TOKEN = 'Bot Token'
+BOT_TOKEN = 'Token'
 
 def get_updates():
     http = urllib3.PoolManager()

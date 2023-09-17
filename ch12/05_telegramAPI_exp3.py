@@ -1,7 +1,7 @@
 import urllib3
 import json
 
-BOT_TOKEN = 'Bot Token'
+BOT_TOKEN = 'Token'
 
 def sendPhoto(chat_id, image_url):
     data = {
@@ -13,6 +13,6 @@ def sendPhoto(chat_id, image_url):
     response = http.request('POST',url ,fields=data)
     return json.loads(response.data.decode('utf-8'))
 
-result = sendPhoto(1613810898,"https://wikibook.co.kr/images/cover/s/9791158394264.jpg")
+result = sendPhoto(1613810898,"https://wikibook.co.kr/images/cover/l/9791158394608.jpg")
 
 print(result)

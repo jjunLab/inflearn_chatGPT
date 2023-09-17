@@ -8,3 +8,4 @@ data = {"title": "Created Post", "body": "Lorem ipsum", "userId": 5}
 response = http.request('POST', url, fields=data)
 
 print(response.data)
+print(response.status)
