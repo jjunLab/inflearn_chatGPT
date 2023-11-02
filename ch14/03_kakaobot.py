@@ -46,7 +46,7 @@ def timeover():
 # ChatGPT에게 질문/답변 받기
 def getTextFromGPT(prompt):
     messages_prompt = [{"role": "system", "content": 'You are a thoughtful assistant. Respond to all input in 25 words and answer in korea'}]
-    messages_prompt += [{"role": "system", "content": prompt}]
+    messages_prompt += [{"role": "user", "content": prompt}]
     response = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=messages_prompt)
     message = response["choices"][0]["message"]["content"]
     return message
